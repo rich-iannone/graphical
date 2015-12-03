@@ -1,0 +1,22 @@
+Package: graphical
+Type: Package
+Title: The graphical Package for R
+Version: 0.0.1
+Date: 2015-12-03
+Authors@R: 
+      person(
+        "Richard", "Iannone"
+        , role = c("aut", "cre")
+        , comment = "R interface"
+        , email = "riannone@me.com"
+      )
+Maintainer: Richard Iannone <riannone@me.com>
+Description: The graphical package for R.
+License: MIT + file LICENSE
+Imports:
+    DiagrammeR (>= 0.8.1)
+URL: https://github.com/rich-iannone/graphical
+BugReports: https://github.com/rich-iannone/graphical/issues
+Suggests:
+    testthat
+RoxygenNote: 5.0.0
