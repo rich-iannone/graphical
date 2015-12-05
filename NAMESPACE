@@ -3,4 +3,5 @@
 export(add_constant_node)
 export(add_function_node)
 export(add_vector_node)
+export(connect_nodes)
 export(create_graph_space)
