@@ -40,16 +40,43 @@ add_function_node <- function(graph, name){
   # Insert the function into the graph
   graph <- add_node_df(graph, function_node)
   
-  # Classes for arguments with defaults
-  for (i in 1:length(eval(call("formals", name)))){
-    if (i == 1) classes <- vector(mode = "character")
+  function_args_df <- 
+    data.frame(mat.or.vec(nr = length(names(eval(call("formals", name)))),
+                          nc = 3),
+               stringsAsFactors = FALSE)
+  
+  colnames(function_args_df) <- c("arg_name", "arg_required", "dflt_val")
+  
+  function_args_df$arg_name <- names(eval(call("formals", name)))
+  
+  # Get argument list
+  arg_list <- as.list(eval(call("formals", name)))
+  
+  for (i in 1:length(arg_list)){
     
-    classes <- c(classes, class(eval(call("formals", name))[[i]]))
+    if (i == 1) args_required <- vector(mode = "character")
     
-    if (i == length(eval(call("formals", name)))){
-      classes[which(classes == "name")] <- ""
+    if (is.character(as.list(eval(call("formals", name)))[i][[1]]) |
+                             is.logical(as.list(eval(call("formals", name)))[i][[1]])){
+      arg_required <- FALSE
     }
+    
+    arg_required <- ifelse(is.null(as.list(eval(call("formals", name)))[[i]]), FALSE, TRUE)
+    
+    arg_required <- ifelse(nchar(as.character(eval(call("formals", name)))[i]) > 0,
+                           FALSE, TRUE)
+    
+    if (formalArgs(name)[i] == "...") arg_required <- FALSE
+    
+    if (is.character(arg_list[[i]])) arg_required <- FALSE
+    
+    args_required <- c(args_required,
+                       arg_required)
   }
+  
+  function_args_df$arg_required <- args_required
+  
+  function_args_df$dflt_val <- as.character(eval(call("formals", name)))
   
   # Create the node data frame for function's arguments
   argument_nodes <-
