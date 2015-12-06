@@ -34,7 +34,7 @@ add_constant_node <- function(graph, value){
                                         format = "d",
                                         flag = "0")),
                  type = "constant",
-                 label = paste0("C -- ", value),
+                 label = paste0("C\n", value),
                  data_value = value,
                  shape = "circle")
   
