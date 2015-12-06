@@ -5,16 +5,22 @@ library(DiagrammeR)
 library(magrittr)
 
 # Creation of graph
+#simple_graph <-
+#  create_graph_space() %>%
+#  add_n_nodes(2) %>% select_nodes %>%
+#  add_n_nodes_to_selection(5) %>% clear_selection %>%
+#  add_n_nodes(2) %>% add_edge(1, 13) %>% add_edge(2, 13) %>%
+#  add_edge(13, 14) %>%
+#  set_node_attr(nodes = c(3:12), node_attr = "constant", values = 3) %>%
+#  set_node_attr(nodes = c(1, 2, 13), node_attr = "function", values = "sum") %>%
+#  set_node_attr(nodes = 14, node_attr = "function", values = "print")
+
 simple_graph <-
-  create_graph() %>%
-  set_global_graph_attr("graph", "output", "visNetwork") %>%
-  add_n_nodes(2) %>% select_nodes %>%
-  add_n_nodes_to_selection(5) %>% clear_selection %>%
-  add_n_nodes(2) %>% add_edge(1, 13) %>% add_edge(2, 13) %>%
-  add_edge(13, 14) %>%
-  set_node_attr(nodes = c(3:12), node_attr = "constant", values = 3) %>%
-  set_node_attr(nodes = c(1, 2, 13), node_attr = "function", values = "sum") %>%
-  set_node_attr(nodes = 14, node_attr = "function", values = "print")
+  create_graph_space() %>%
+  add_constant_node(3) %>% add_constant_node(7) %>%
+  add_function_node("sum") 
+
+render_graph(simple_graph)
 
 #
 # Evaluation of graph
