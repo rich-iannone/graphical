@@ -90,8 +90,6 @@ add_function_node <- function(graph, name){
                  label = paste0(names(eval(call("formals", name)))),
                  type = "argument",
                  function_name = name,
-                 data_value = as.character(eval(call("formals", name))),
-                 data_types = classes,
                  shape = "circle")
   
   # Count number of function nodes of this type in the graph
