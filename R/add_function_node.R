@@ -25,6 +25,14 @@ add_function_node <- function(graph, name){
     }
   }
   
+  # Count number of function nodes of this type in the graph
+  if (is.null(graph$nodes_df)){
+    instance_number <- 1
+  } else {
+  instance_number <-
+    length(which(get_node_df(graph)$label %in% paste0("F\n", name)))
+  }
+  
   # Create the node
   function_node <-
     create_nodes(nodes = paste0("_f_",
