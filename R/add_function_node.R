@@ -70,19 +70,21 @@ add_function_node <- function(graph, name){
     
     if (i == 1) args_required <- vector(mode = "character")
     
-    if (is.character(as.list(eval(call("formals", name)))[i][[1]]) |
-                             is.logical(as.list(eval(call("formals", name)))[i][[1]])){
+    arg_required <- TRUE
+    
+    if (is.character(as.list(eval(call("formals", name)))[i][1]) |
+        is.logical(as.list(eval(call("formals", name)))[i][1])){
       arg_required <- FALSE
     }
     
-    arg_required <- ifelse(is.null(as.list(eval(call("formals", name)))[[i]]), FALSE, TRUE)
+    arg_required <- ifelse(is.null(as.list(eval(call("formals", name)))[i]), FALSE, TRUE)
     
-    arg_required <- ifelse(nchar(as.character(eval(call("formals", name)))[i]) > 0,
+    arg_required <- ifelse(char_count_defaults[i] > 0,
                            FALSE, TRUE)
     
-    if (formalArgs(name)[i] == "...") arg_required <- FALSE
+    if (triple_dot_present[i]) arg_required <- FALSE
     
-    if (is.character(arg_list[[i]])) arg_required <- FALSE
+    if (is.character(arg_list[i][[1]])) arg_required <- FALSE
     
     args_required <- c(args_required,
                        arg_required)
