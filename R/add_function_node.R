@@ -107,10 +107,10 @@ add_function_node <- function(graph, name){
                  type = "argument",
                  function_name = name,
                  shape = "circle")
-  
+
   # Count number of function nodes of this type in the graph
   instance_number <-
-    length(which(get_node_df(graph)$label %in% paste0("F -- ", name)))
+    length(which(get_node_df(graph)$label %in% paste0("F\n", name)))
   
   # Create node which has the instance number
   instance_no_node <-
