@@ -62,6 +62,8 @@ add_function_node <- function(graph, name){
   # Get argument list
   arg_list <- as.list(eval(call("formals", name)))
   
+  char_count_defaults <- nchar(as.character(eval(call("formals", name))))
+  
   for (i in 1:length(arg_list)){
     
     if (i == 1) args_required <- vector(mode = "character")
