@@ -127,6 +127,30 @@ add_function_node <- function(graph, name){
              from = get_nodes(instance_no_node),
              to = get_nodes(function_node),
              rel = "inst_no")
+  # Create default argument nodes for each function argument
+  for (i in which(function_args_df$arg_required == FALSE)){
+    
+    #graph <- add_constant_node(graph, value = function_args_df[i,3])
+    
+    def_arg_node <-
+      create_nodes(nodes = paste0("_default_f",
+                                  instance_number,i),
+                   type = "default_val",
+                   label = paste0("D\n", function_args_df[i,3]),
+                   data_value = function_args_df[i,3],
+                   shape = "circle")
+    graph <- add_node_df(graph, def_arg_node)
+    graph <- select_last_node(graph)
+    graph <- add_edge(graph, from = get_selection(graph)[[1]],
+             to = paste0("_f_",
+                         formatC(functions_in_graph + 1,
+                                 width = 3,
+                                 format = "d",
+                                 flag = "0"),
+                         "_",
+               function_args_df$arg_name[i]),
+             rel = "default_val")
+  }
   
   return(graph)
 }
