@@ -125,8 +125,6 @@ add_function_node <- function(graph, name){
   # Add the argument nodes to the graph
   graph <- add_node_df(graph, argument_nodes)
   
-  # Add the instance number for the function to the graph
-  graph <- add_node_df(graph, instance_no_node)
   
   # Add edges from the argument nodes to the function itself
   for (i in 1:length(get_nodes(argument_nodes))){
@@ -137,12 +135,6 @@ add_function_node <- function(graph, name){
                rel = "argument_for")
   }
   
-  # Add an edge from the instance number to the function itself
-  graph <- 
-    add_edge(graph,
-             from = get_nodes(instance_no_node),
-             to = get_nodes(function_node),
-             rel = "inst_no")
   # Create default argument nodes for each function argument
   for (i in which(function_args_df$arg_required == FALSE)){
     
