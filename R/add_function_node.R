@@ -41,7 +41,7 @@ add_function_node <- function(graph, name){
                                         format = "d",
                                         flag = "0")),
                  type = "function",
-                 label = paste0("F -- ", name),
+                 label = paste0("F\n", name, "\n(", instance_number, ")"),
                  function_name = name,
                  shape = "circle")
   
