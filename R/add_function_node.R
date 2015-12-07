@@ -59,6 +59,8 @@ add_function_node <- function(graph, name){
   
   triple_dot_present <- grepl("\\.\\.\\.", formalArgs(name))
   
+  character_type_present <- is.character(as.list(eval(call("formals", name))))
+  
   # Get argument list
   arg_list <- as.list(eval(call("formals", name)))
   
