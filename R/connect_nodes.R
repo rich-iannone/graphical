@@ -10,6 +10,8 @@
 
 connect_nodes <- function(graph, from, to){
   
-  add_edge()
+  graph <- add_edge(graph, from = from, to = to, rel = "connection")
+  
+  return(graph)
   
 }
